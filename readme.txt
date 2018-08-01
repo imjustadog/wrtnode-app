@@ -1,3 +1,6 @@
+每次编译之前最好加上：
+export STAGING_DIR=/home/adoge/wrtnode/staging_dir
+
 在openwrt加载i2c命令：
 insmod i2c-gpio-custom bus0=0,1,2
 

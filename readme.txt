@@ -11,5 +11,5 @@ mjpg_streamer -i "input_uvc.so -d /dev/video0 -r 160x120 -f 20 -yuv"  -o "output
 每隔5秒拍照命令（存在tmp下）
 mjpg_streamer -i "input_uvc.so -d /dev/video0 -r 160x120 -f 20 -yuv" -o "output_file.so -d 5000 -f /tmp"
 
-交叉编译opencv程序命令：（要加-lopencv_xxx）
-./mipsel-openwrt-linux-g++ ~/wrtnode/package/opencvtest/src/test.cpp -o ~/wrtnode/package/opencvtest/src/test -lopencv_core -lopencv_highgui
+编译好的output_file.so存放：
+sudo scp output_file.so root@192.168.8.1:/usr/lib/

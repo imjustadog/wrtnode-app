@@ -11,12 +11,14 @@ int main(int argc, char *argv[])
 {
     Mat frame, mask;
     BackgroundSubtractorMOG bgSubtractor(4,2,0.5,false);
+    sleep(5);
     cout<<"start"<<endl;
     while(1) {
         frame = imread("1.jpg",CV_LOAD_IMAGE_UNCHANGED);
         bgSubtractor(frame,mask,0.001);
         imwrite("2.jpg",mask);
-        sleep(1);
+        cout<<"detect"<<endl;
+        sleep(2);
     }
     cout<<"end"<<endl;
     return 0;

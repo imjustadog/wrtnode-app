@@ -13,3 +13,4 @@ mjpg_streamer -i "input_uvc.so -d /dev/video0 -r 160x120 -f 20 -yuv" -o "output_
 
 编译好的output_file.so存放：
 sudo scp output_file.so root@192.168.8.1:/usr/lib/
+

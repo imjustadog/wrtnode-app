@@ -37,6 +37,7 @@
 #include <time.h>
 #include <syslog.h>
 #include <dirent.h>
+#include <semaphore.h>
 
 #include "../../utils.h"
 #include "../../mjpg_streamer.h"
@@ -211,6 +212,8 @@ void *worker_thread(void *arg)
     	execle("test",NULL,NULL,NULL);
     }
     else {
+	sem_t *sem_test;
+	sem_test = sem_open("getphoto", O_CREAT, 0644, 0);
         while(ok >= 0 && !pglobal->stop) {
             DBG("waiting for fresh frame\n");
             pthread_mutex_lock(&pglobal->in[input_number].db);
@@ -279,7 +282,8 @@ void *worker_thread(void *arg)
             }
 
             close(fd);
-            printf("captured\r\n");
+            printf("capture\r\n");
+            sem_post(sem_test);
 
             /* call the command if user specified one, pass current filename as argument */
             if(command != NULL) {
@@ -319,6 +323,8 @@ void *worker_thread(void *arg)
                 usleep(1000 * delay);
             }
         }
+	sem_close(sem_test);
+	sem_unlink("getphoto");
     }
 
     /* cleanup now */
